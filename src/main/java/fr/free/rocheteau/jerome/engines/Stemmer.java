@@ -17,8 +17,6 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.tartarus.snowball.SnowballStemmer;
 import org.tartarus.snowball.models.PorterStemmer;
 
-import fr.univnantes.lina.UIMAProfiler;
-
 public class Stemmer extends JCasAnnotator_ImplBase {
 
 	public static final String PARAM_LANGUAGE = "Language";
@@ -96,7 +94,6 @@ public class Stemmer extends JCasAnnotator_ImplBase {
 	
 	@Override
 	public void process(JCas cas) throws AnalysisEngineProcessException {
-		UIMAProfiler.getProfiler("AnalysisEngine").start(this, "process");
 		Type type = this.getType(cas);
 		Feature feature = this.getFeature(cas, type, this.update);
 		AnnotationIndex<Annotation> index = cas.getAnnotationIndex(type);
@@ -117,7 +114,6 @@ public class Stemmer extends JCasAnnotator_ImplBase {
 				}
 			}
 		}
-		UIMAProfiler.getProfiler("AnalysisEngine").stop(this, "process");
 	}
 
 	private void update(JCas cas, Annotation annotation, Feature feature, String value) {
